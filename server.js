@@ -3,14 +3,16 @@
   const { Server } = require("socket.io");
   const cors = require("cors");
 
+  const allowedOrigin = "https://catap.netlify.app";
+
   const app = express();
-  app.use(cors());
+  app.use(cors({ origin: allowedOrigin }));
   app.use(express.json());
 
   const server = http.createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "https://catap.netlify.app/", // Vite prod server
+      origin: allowedOrigin, // Vite prod server
       methods: ["GET", "POST"],
     },
   });
